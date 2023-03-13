@@ -40,7 +40,7 @@ public class BankController {
 
     // DELETE functionality
     @DeleteMapping(path = "{cardNumber}")
-    public void deleteStudent(@PathVariable("cardNumber") String cardNumber) {
+    public void deleteAccount(@PathVariable("cardNumber") String cardNumber) {
         service.deleteAccount(cardNumber);
     }
 }
