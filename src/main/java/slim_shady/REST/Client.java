@@ -62,10 +62,9 @@ public class Client implements Runnable {
 
     // POST functionality
     @PostMapping
-    public void addAccount(@RequestBody BankAccount account) {
+    public void addAccount(BankAccount account) {
         String url = baseUrl;
         //restTemplate.postForObject(url, account, Void.class);
-
 
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("cardNumber", account.getCardNumber());
@@ -77,7 +76,6 @@ public class Client implements Runnable {
     }
 
     // GET functionality
-    @GetMapping
     public void getBalance(String cardNumber) {
         String url = baseUrl + "?cardNumber=" + cardNumber;
         float balance = restTemplate.getForObject(url, Float.class);
@@ -85,24 +83,21 @@ public class Client implements Runnable {
     }
 
     // PUT functionality
-    @PutMapping(path = "/add/{cardNumber}")
-    public void addMoney(@PathVariable("cardNumber") String cardNumber, @RequestParam(required = true) float amount) {
+    public void addMoney(String cardNumber, float amount) {
         String url = baseUrl + "/add/" + cardNumber + "?amount=" + amount;
         restTemplate.put(url, null);
         System.out.println("<" + this.name + "> - Added " + amount + " from card-number " + cardNumber);
     }
 
     // PUT functionality
-    @PutMapping(path = "/remove/{cardNumber}")
-    public void removeMoney(@PathVariable("cardNumber") String cardNumber, @RequestParam(required = true) float amount) {
+    public void removeMoney(String cardNumber, float amount) {
         String url = baseUrl + "/remove/" + cardNumber + "?amount=" + amount;
         restTemplate.put(url, null);
         System.out.println("<" + this.name + "> - Removed " + amount + " from card-number " + cardNumber);
     }
 
     // DELETE functionality
-    @DeleteMapping(path = "/{cardNumber}")
-    public void deleteAccount(@PathVariable("cardNumber") String cardNumber) {
+    public void deleteAccount(String cardNumber) {
         String url = baseUrl + "/" + cardNumber;
         restTemplate.delete(url);
         System.out.println("<" + this.name + "> - Deleted Account with card-number " + cardNumber);
