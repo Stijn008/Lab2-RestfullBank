@@ -24,7 +24,7 @@ public class Client implements Runnable {
     public Client(String name) {
         this.name = name;
         this.restTemplate = new RestTemplate();
-        this.baseUrl = "http://localhost:8080/api/bank";
+        this.baseUrl = "http://172.28.0.2:8080/api/bank";
         System.out.println("<---> " + name + " Instantiated <--->");
     }
 
